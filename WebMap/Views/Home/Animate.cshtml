@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2 style="background-color: yellow; color: blue; text-align: center; font-style: oblique">
+    My first Google Map API integration project with ASP.NET MVC
+</h2>
+
+
+<div id="map" style="height:600px; width:100%"></div>
+
+<script>
+    (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })({
+        key: "AIzaSyBMYzsd2xLdFTICmUyjE71zrjW89Y5EOSU",
+        v: "weekly",
+
+    });
+</script>
+
+<script>
+    let map;
+
+    async function initMap() {
+        const { Map } = await google.maps.importLibrary("maps");
+
+        map = new Map(document.getElementById("map"), {
+            center: { lat: 4.6125522, lng: 13.1535811 },
+            zoom: 8,
+            scrollwheel: true,
+            draggable: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        let markerOptions = {
+            position: new google.maps.LatLng(3.7990131, 10.1265567),
+            animation: google.maps.Animation.BOUNCE
+        }
+
+        let markerOptions2 = {
+            position: new google.maps.LatLng(3.9149770999999998, 11.525281048671781),
+            animation: google.maps.Animation.BOUNCE
+        }
+
+
+        let marker = new google.maps.Marker(markerOptions);
+
+        let marker2 = new google.maps.Marker(markerOptions2);
+
+
+        marker.setMap(map);
+
+        marker2.setMap(map);
+
+    }
+
+    initMap();
+</script>
+
+
+
+<footer>
+    <p style="background-color: yellow; font-weight: bold; color: blue; text-align: center; font-style: oblique">
+        &copy @DateTime.Now.ToLocalTime()
+    </p>
+</footer>
+
+
+
