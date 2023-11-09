@@ -18,7 +18,7 @@ namespace WebMap.Controllers
             return View();
         }
 
-        public IActionResult Details()
+        public IActionResult Drawing()
         {
             return View();
         }
